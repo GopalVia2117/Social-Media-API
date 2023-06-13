@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { trusted } = require("mongoose");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const Token = require("../models/Token");
 
 //update user
 router.put("/:id", async (req, res) => {
@@ -129,7 +130,26 @@ router.get("/search/:username", async (req, res) => {
     );
     return res.status(200).json(response);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send("Internal server Error");
+  }
+});
+
+router.get("/:id/verify/:token", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+    if (!user) return res.status(400).send("Invalid Link");
+
+    const token = await Token.findOne({
+      userId: user._id,
+      token: req.params.token,
+    });
+    if (!token) return res.status(400).send("Invalid Link");
+
+    await user.updateOne({ $set: { verified: true } });
+    await token.deleteOne();
+    return res.status(200).send("Email verified successfully");
+  } catch (err) {
+    return res.status(500).send("Internal Server Error");
   }
 });
 

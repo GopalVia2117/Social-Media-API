@@ -67,6 +67,10 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       enum: [1, 2, 3],
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   { timestamps: true }
