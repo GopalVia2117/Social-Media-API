@@ -36,9 +36,9 @@ router.post("/register", async (req, res) => {
     const subject = "Socio Verification";
     const html = `
         <h2>Verify your Email Adress</h2>
-        <button style="padding: 4px 8px 4px 8px; background-color:green; color: white">
-         <a style="text-decoration:none" href="${process.env.CLIENT_URL}/users/${newUser._id}/verify/${token.token}">Verify your account</a>
-        </button>
+        <button style="padding: 4px 8px 4px 8px; background-color:green; border: none">
+         <a style="text-decoration:none; color:white" href="${process.env.CLIENT_URL}/users/${newUser._id}/verify/${token.token}">Verify your account</a>
+        </button>  
         `;
     await sendMail(newUser.email, subject, html);
     return res
@@ -69,8 +69,8 @@ router.post("/login", async (req, res) => {
         const subject = "Socio Verification";
         const html = `
         <h2>Verify your Email Adress</h2>
-        <button style="padding: 4px 8px 4px 8px; background-color:green; color: white">
-         <a style="text-decoration:none" href="${process.env.CLIENT_URL}/users/${user._id}/verify/${token.token}">Verify your account</a>
+        <button style="padding: 4px 8px 4px 8px; background-color:green; border: none">
+         <a style="text-decoration:none; color:white" href="${process.env.CLIENT_URL}/users/${user._id}/verify/${token.token}">Verify your account</a>
         </button>
         `;
         const info = await sendMail(user.email, subject, html);
