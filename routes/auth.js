@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
 
     const subject = "Socio Verification";
     const html = `
-        <h2>Verify your Email Adress</h2>
+        <h2>Verify your Email Address</h2>
         <button style="padding: 4px 8px 4px 8px; background-color:green; border: none">
          <a style="text-decoration:none; color:white" href="${process.env.CLIENT_URL}/users/${newUser._id}/verify/${token.token}">Verify your account</a>
         </button>  
@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
 
         const subject = "Socio Verification";
         const html = `
-        <h2>Verify your Email Adress</h2>
+        <h2>Verify your Email Address</h2>
         <button style="padding: 4px 8px 4px 8px; background-color:green; border: none">
          <a style="text-decoration:none; color:white" href="${process.env.CLIENT_URL}/users/${user._id}/verify/${token.token}">Verify your account</a>
         </button>
